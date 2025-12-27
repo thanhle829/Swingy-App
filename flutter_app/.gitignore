@@ -1,0 +1,29 @@
+# Flutter / Dart
+build/
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Android
+**/local.properties
+**/.gradle
+android/.cxx/
+android/.kotlin/
+**/build/
+
+# iOS
+ios/Pods/
+ios/Runner.xcworkspace/
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+*.log
+
+# Misc
+.DS_Store
+*.lock

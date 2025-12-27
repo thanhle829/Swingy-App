@@ -1,0 +1,8 @@
+# Ignore everything in the root directory
+/*
+
+# Do not ignore the flutter_app folder
+!/flutter_app/
+
+# Optional: Do not ignore the .gitignore file itself 
+!.gitignore
