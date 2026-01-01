@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart' show kIsWeb;
+import '../../shared/platform_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -69,7 +68,8 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
       if (kIsWeb) {
         _videoController = VideoPlayerController.networkUrl(Uri.parse(media));
       } else {
-        _videoController = VideoPlayerController.file(File(media));
+        // Use a platform helper to avoid importing dart:io on web builds
+        _videoController = VideoPlayerController.file(fileFromPath(media));
       }
 
       _initializeVideoPlayerFuture = _videoController!.initialize().then((_) {
