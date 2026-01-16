@@ -3,6 +3,7 @@
 
 # Do not ignore the flutter_app folder
 !/flutter_app/
+!/backend/
 
 # Optional: Do not ignore the .gitignore file itself 
 !.gitignore

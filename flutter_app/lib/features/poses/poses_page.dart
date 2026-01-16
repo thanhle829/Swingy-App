@@ -106,7 +106,9 @@ class PosesPage extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(gradient: LinearGradient(colors: [Color(0xFF0F1720), Color(0xFF0B1220)])),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [Color(0xFF203214), Color(0xFF162712)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+        ),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -116,13 +118,13 @@ class PosesPage extends StatelessWidget {
                   onPressed: () => context.go('/feedback'),
                   icon: const Icon(Icons.arrow_back, color: Colors.white),
                   label: const Text('Back to Analysis', style: TextStyle(color: Colors.white)),
-                  style: OutlinedButton.styleFrom(side: const BorderSide(color: Color(0xFF334155)), backgroundColor: Colors.transparent),
+                  style: OutlinedButton.styleFrom(side: const BorderSide(color: Color(0xFF4F8A1C)), backgroundColor: Colors.transparent),
                 ),
               ]),
               const SizedBox(height: 12),
               const Text('Famous Golfer Poses', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white)),
               const SizedBox(height: 6),
-              const Text('Learn and compare your posture with professional golfers', style: TextStyle(color: Color(0xFF94A3B8))),
+              const Text('Learn and compare your posture with professional golfers', style: TextStyle(color: Color(0xFFBFD2A8))),
               const SizedBox(height: 16),
               Expanded(
                 child: ListView.separated(
@@ -131,8 +133,8 @@ class PosesPage extends StatelessWidget {
                   itemBuilder: (context, idx) {
                     final g = golfers[idx];
                     return Card(
-                      color: const Color(0xFF0B1220),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF334155))),
+                      color: const Color(0xFF2E4F10),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF4F8A1C))),
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -142,10 +144,10 @@ class PosesPage extends StatelessWidget {
                             onTap: g['videoAsset'] != null ? () => _showVideo(context, g['videoAsset'] as String) : null,
                             child: Container(
                               height: 180,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.black),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: const Color(0xFF9AAE81).withOpacity(0.14)),
                               child: Center(
                                 child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                                  const Icon(Icons.play_circle_outline, color: Colors.white30, size: 48),
+                                  const Icon(Icons.play_circle_outline, color: Colors.white24, size: 48),
                                   if (g['videoAsset'] != null) const SizedBox(width: 12),
                                   if (g['videoAsset'] != null) const Text('Play video', style: TextStyle(color: Colors.white70))
                                 ]),
@@ -153,7 +155,7 @@ class PosesPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text('Stance: ${g['stance']}', style: const TextStyle(color: Colors.white70)),
+                          Text('Stance: ${g['stance']}', style: const TextStyle(color: Color(0xFFBFD2A8)), ),
                         ]),
                       ),
                     );

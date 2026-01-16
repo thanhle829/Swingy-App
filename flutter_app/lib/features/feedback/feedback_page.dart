@@ -108,11 +108,11 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [Color(0xFF0F1720), Color(0xFF0B1220)]),
+          color: Color(0xFF203214),
         ),
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(20, 20, 20, MediaQuery.of(context).padding.bottom + 20),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 720),
               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -126,7 +126,7 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
                 Container(
                   width: double.infinity,
                   height: 420,
-                  decoration: BoxDecoration(color: const Color(0xFF111827), borderRadius: BorderRadius.circular(20), border: Border.all(color: const Color(0xFF334155), width: 2)),
+                  decoration: BoxDecoration(color: const Color(0xFF94A36F).withOpacity(0.35), borderRadius: BorderRadius.circular(20), border: Border.all(color: const Color(0xFF4F8A1C), width: 2)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Center(
@@ -194,15 +194,19 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
 
                 // Score
                 Card(
-                  color: const Color(0xFF0B1220),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF334155))),
+                  color: const Color(0xFF2E4F10),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF4F8A1C))),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(children: [
-                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                        Row(children: const [Icon(Icons.trending_up, color: Colors.lightBlueAccent), SizedBox(width: 8), Text('Posture Score', style: TextStyle(color: Colors.white))]),
-                        Text('${analysis.postureScore}%', style: TextStyle(color: postureColor, fontSize: 24, fontWeight: FontWeight.bold)),
-                      ]),
+                              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                              Row(children: [
+                                Image.asset('assets/images/icons8-line-chart-50.png', width: 20, height: 20, color: Colors.white70),
+                                const SizedBox(width: 8),
+                                const Text('Posture Score', style: TextStyle(color: Colors.white))
+                              ]),
+                              Text('${analysis.postureScore}%', style: TextStyle(color: postureColor, fontSize: 24, fontWeight: FontWeight.bold)),
+                            ]),
                       const SizedBox(height: 12),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(6),
@@ -220,12 +224,16 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
 
                 // Detected body areas
                 Card(
-                  color: const Color(0xFF0B1220),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF334155))),
+                  color: const Color(0xFF2E4F10),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF4F8A1C))),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Row(children: const [Icon(Icons.check_circle, color: Colors.lightBlueAccent), SizedBox(width: 8), Text('Detected Body Areas', style: TextStyle(color: Colors.white))]),
+                      Row(children: [
+                        Image.asset('assets/images/icons8-verify-64.png', width: 20, height: 20, color: Colors.white70),
+                        const SizedBox(width: 8),
+                        const Text('Detected Body Areas', style: TextStyle(color: Colors.white))
+                      ]),
                       const SizedBox(height: 12),
                       Wrap(spacing: 8, runSpacing: 8, children: analysis.bodyAreas.map((b) => Chip(label: Text(b), backgroundColor: Colors.blueGrey.shade800, labelStyle: const TextStyle(color: Colors.lightBlueAccent))).toList()),
                     ]),
@@ -236,34 +244,80 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
                 // Key Issues
                 if (analysis.keyIssues.isNotEmpty)
                   Card(
-                    color: const Color(0xFF0B1220),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF334155))),
+                    color: const Color(0xFF2E4F10),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF4F8A1C))),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Row(children: const [Icon(Icons.warning_amber, color: Colors.redAccent), SizedBox(width: 8), Text('Key Issues', style: TextStyle(color: Colors.white))]),
+                        Row(children: [
+                          Image.asset('assets/images/warning.png', width: 20, height: 20),
+                          const SizedBox(width: 8),
+                          const Text('Key Issues', style: TextStyle(color: Colors.white))
+                        ]),
                         const SizedBox(height: 8),
                         ...analysis.keyIssues.map((issue) => Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Row(children: [const SizedBox(width: 8), Text('•', style: TextStyle(color: Colors.redAccent)), const SizedBox(width: 8), Expanded(child: Text(issue, style: TextStyle(color: Colors.white70)))]))),
                       ]),
                     ),
                   ),
                 const SizedBox(height: 12),
+                    // Improvements
+                    Card(
+                      color: const Color(0xFF2E4F10),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF4F8A1C))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          Row(children: [
+                            Image.asset('assets/images/icons8-progress-30.png', width: 20, height: 20, color: Colors.white70),
+                            const SizedBox(width: 8),
+                            const Text('Improvement Recommendations', style: TextStyle(color: Colors.white))
+                          ]),
+                          const SizedBox(height: 8),
+                          ...analysis.improvements.map((improvement) => Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Row(children: [const SizedBox(width: 8), Text('•', style: TextStyle(color: Colors.amberAccent)), const SizedBox(width: 8), Expanded(child: Text(improvement, style: TextStyle(color: Colors.white70)))]))),
+                        ]),
+                      ),
+                    ),
 
-                // Improvements
-                Card(
-                  color: const Color(0xFF0B1220),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF334155))),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Row(children: const [Icon(Icons.trending_up, color: Colors.amberAccent), SizedBox(width: 8), Text('Improvement Recommendations', style: TextStyle(color: Colors.white))]),
-                      const SizedBox(height: 8),
-                      ...analysis.improvements.map((improvement) => Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Row(children: [const SizedBox(width: 8), Text('•', style: TextStyle(color: Colors.amberAccent)), const SizedBox(width: 8), Expanded(child: Text(improvement, style: TextStyle(color: Colors.white70)))]))),
-                    ]),
-                  ),
-                ),
+                    const SizedBox(height: 12),
 
-                const SizedBox(height: 12),
+                    // Possible Injury Areas & Prevention Tips
+                    Card(
+                      color: const Color(0xFF2E4F10),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFF4F8A1C))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          Row(children: [
+                            Image.asset('assets/images/warning.png', width: 20, height: 20),
+                            const SizedBox(width: 8),
+                            const Text('Possible Injury Areas & Prevention Tips', style: TextStyle(color: Colors.white))
+                          ]),
+                          const SizedBox(height: 12),
+
+                          // Injury areas
+                          const Text('Possible Injury Areas:', style: TextStyle(color: Colors.white70)),
+                          const SizedBox(height: 8),
+                          Wrap(spacing: 8, runSpacing: 8, children: (
+                            analysis.bodyAreas.isNotEmpty ? analysis.bodyAreas : ['General']
+                          ).map<Widget>((area) => Chip(label: Text(area, style: const TextStyle(color: Colors.white)), backgroundColor: Colors.red.shade800)).toList()),
+
+                          const SizedBox(height: 12),
+
+                          // Prevention tips
+                          const Text('Prevention Tips:', style: TextStyle(color: Colors.white70)),
+                          const SizedBox(height: 8),
+                          if (analysis.improvements.isNotEmpty)
+                            ...analysis.improvements.map((tip) => Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Row(children: [const SizedBox(width: 8), Image.asset('assets/images/icons8-verify-64.png', width: 16, height: 16, color: Colors.white70), const SizedBox(width: 8), Expanded(child: Text(tip, style: const TextStyle(color: Colors.white70)))])))
+                          else
+                            ...[
+                              Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Row(children: const [SizedBox(width: 8), Icon(Icons.fitness_center, color: Colors.white70), SizedBox(width: 8), Expanded(child: Text('Build core strength and maintain flexibility to support the spine.', style: TextStyle(color: Colors.white70)))])),
+                              Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Row(children: const [SizedBox(width: 8), Icon(Icons.self_improvement, color: Colors.white70), SizedBox(width: 8), Expanded(child: Text('Work on shoulder mobility and posture exercises to reduce strain.', style: TextStyle(color: Colors.white70)))])),
+                            ]
+                        ]),
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
 
                 ElevatedButton.icon(onPressed: () => context.go('/poses'), icon: const Icon(Icons.emoji_events), label: const Padding(padding: EdgeInsets.symmetric(vertical: 14), child: Text('View Famous Golfer Poses', style: TextStyle(fontWeight: FontWeight.bold)))),
 
@@ -273,10 +327,17 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
                     child: OutlinedButton(
                       onPressed: () {
                         ref.read(analysisProvider.notifier).clear();
-                        context.go('/');
+                        context.go('/camera');
                       },
-                      style: OutlinedButton.styleFrom(side: const BorderSide(color: Color(0xFF334155))),
-                      child: const Padding(padding: EdgeInsets.symmetric(vertical: 14), child: Text('Retake')),
+                      style: OutlinedButton.styleFrom(side: const BorderSide(color: Color(0xFF4F8A1C)), backgroundColor: const Color(0xFF203214)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          Image.asset('assets/images/icons8-video-50.png', width: 18, height: 18, color: Colors.white70),
+                          const SizedBox(width: 8),
+                          const Text('Retake', style: TextStyle(color: Colors.white)),
+                        ]),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -285,8 +346,15 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
                       onPressed: () {
                         // TODO: Save results
                       },
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                      child: const Padding(padding: EdgeInsets.symmetric(vertical: 14), child: Text('Save Results')),
+                      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF5DB32B), shape: const StadiumBorder()),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          Image.asset('assets/images/icons8-save-64.png', width: 18, height: 18, color: Colors.white),
+                          const SizedBox(width: 8),
+                          const Text('Save Results', style: TextStyle(color: Colors.white)),
+                        ]),
+                      ),
                     ),
                   ),
                 ])
